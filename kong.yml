@@ -1,0 +1,439 @@
+_format_version: "3.0"
+_transform: true
+
+consumers:
+- username: teste@fiap.com
+  basicauth_credentials:
+  - username: teste@fiap.com
+    password: developer
+   
+services:
+ - connect_timeout: 60000
+   host: host.docker.internal
+   name: tech_challenge
+   port: 8080
+   protocol: http
+   path: /
+   read_timeout: 60000
+   retries: 5
+   write_timeout: 60000
+
+   routes:
+  # Person
+   - name: get_person
+     methods: 
+      - GET
+     paths:
+      - /api/v1/person
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_person_by_id
+     methods: 
+      - GET
+     paths:
+      - /api/v1/person/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_person_by_email
+     methods: 
+      - GET
+     paths:
+      - /api/v1/person/email
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+         
+   - name: create_admin
+     methods: 
+      - POST
+     paths:
+      - /api/v1/person/admin
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+         
+   - name: create_user
+     methods: 
+      - POST
+     paths:
+      - /api/v1/person
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: update_user
+     methods: 
+      - PUT
+     paths:
+      - /api/v1/person/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: delete_user
+     methods: 
+      - DELETE
+     paths:
+      - /api/v1/person/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+  # Item
+   - name: create_item
+     methods: 
+      - POST
+     paths:
+      - /api/v1/items
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_item
+     methods: 
+      - GET
+     paths:
+      - /api/v1/items
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: update_item
+     methods: 
+      - PUT
+     paths:
+      - /api/v1/items/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: delete_item
+     methods: 
+      - DELETE
+     paths:
+      - /api/v1/items/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: items_by_categoria
+     methods: 
+      - GET
+     paths:
+      - /api/v1/items/category/{category}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+  # Order
+   - name: create_order
+     methods: 
+      - POST
+     paths:
+      - /api/v1/orders
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_all_order
+     methods: 
+      - GET
+     paths:
+      - /api/v1/orders
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: end_order_with_id
+     methods: 
+      - PUT
+     paths:
+      - /api/v1/orders/endOrder/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: fake_checkout_order
+     methods: 
+      - PUT
+     paths:
+      - /api/v1/orders/checkout/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_ongoing_orders
+     methods: 
+      - GET
+     paths:
+      - /api/v1/ongoing/orders/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+  # Kitchen
+   - name: kitchen_all_orders
+     methods: 
+      - GET
+     paths:
+      - /api/v1/kitchen
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: kitchen_by_orders
+     methods: 
+      - GET
+     paths:
+      - /api/v1/kitchen/{id}
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: kitchen_send_to_production
+     methods: 
+      - PUT
+     paths:
+      - /api/v1/kitchen/{id}/production
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: kitchen_send_to_done
+     methods: 
+      - PUT
+     paths:
+      - /v1/kitchen/{id}/done
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+  # Payment
+   - name: payment_mock
+     methods: 
+      - POST
+     paths:
+      - /api/v1/payments/confirm/mock
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
+
+   - name: get_payment_confirm_mock
+     methods: 
+      - GET
+     paths:
+      - /api/v1/payments
+     path_handling: v1
+     preserve_host: false
+     protocols:
+      - http
+      - https
+     regex_priority: 0
+     strip_path: false
+     plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+         hide_credentials: false
