@@ -6,7 +6,18 @@ consumers:
   basicauth_credentials:
   - username: teste@fiap.com
     password: developer
-   
+
+plugins:
+  - name: aws-lambda
+    config:
+      aws_key: key
+      aws_secret: secret
+      aws_region: region
+      function_name: name
+      forward_request_body: true
+      forward_request_headers: true
+      forward_request_uri: true
+      
 services:
  - connect_timeout: 60000
    host: host.docker.internal
